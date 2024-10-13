@@ -105,7 +105,8 @@ const moreThanFilter = (csvMatrix, numberOfColumn, filteringNumber) => {
 };
 const stringInFilter = (csvMatrix, numberOfColumn, filteringString) => {
     const filteredArray = [];
-    for (let i = 0; i < csvMatrix.length; i++) {
+    for (let i = 0; i < csvMatrix.length - 1; i++) {
+        console.log(filteringString, csvMatrix[i][numberOfColumn]);
         if (csvMatrix[i][numberOfColumn].includes(filteringString)) {
             filteredArray.push(csvMatrix[i]);
         }

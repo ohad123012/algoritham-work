@@ -164,7 +164,8 @@ const stringInFilter = (
   filteringString: string
 ) => {
   const filteredArray = [];
-  for (let i = 0; i < csvMatrix.length; i++) {
+  for (let i = 0; i < csvMatrix.length - 1; i++) {
+    console.log(filteringString, csvMatrix[i][numberOfColumn]);
     if (csvMatrix[i][numberOfColumn].includes(filteringString)) {
       filteredArray.push(csvMatrix[i]);
     }
@@ -307,4 +308,4 @@ const runCode = () => {
   }
 };
 
-runCode();“[#exercise - #question]: final answer”
+runCode();
