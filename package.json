@@ -1,0 +1,29 @@
+{
+  "name": "algoritam-job",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node dist/csv-work.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/convert-array-to-csv": "^2.0.2",
+    "@types/prompt-sync": "^4.2.3",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "arrays-to-csv": "^2.0.1",
+    "convert-array-to-csv": "^2.0.0",
+    "csv-writer": "^1.6.0",
+    "csvjson": "^5.1.0",
+    "csvtojson": "^2.0.10",
+    "fs": "^0.0.1-security",
+    "prompt-sync": "^4.2.0"
+  }
+}
