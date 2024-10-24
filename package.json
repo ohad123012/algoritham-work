@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "node dist/csv-work.js"
+    "run": "node dist/number-sums-game-refactor.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "arrays-to-csv": "^2.0.1",
+    "combinations": "^1.0.0",
     "convert-array-to-csv": "^2.0.0",
     "csv-writer": "^1.6.0",
     "csvjson": "^5.1.0",
