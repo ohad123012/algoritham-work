@@ -52,7 +52,6 @@ const checkIfAnswerRight = (answer, answerArray) => {
             sumArr += answerArray[i];
         }
     }
-    console.log(sumArr, answer);
     if (sumArr == answer) {
         return true;
     }
@@ -295,87 +294,12 @@ const runGame = () => {
     numbersGrid = removeBiggerThanAnswerNumbers(numbersGrid);
     numbersGrid = removeUnusedNumbers(numbersGrid);
     updateCounterTable(numbersGrid);
-    // while (!checkIfGameEnded(numbersGrid)) {
-    //   numbersGrid = removeUnusedNumbers(numbersGrid);
-    //   updateCounterTable(numbersGrid);
-    //   console.log(numbersGrid);
-    // }
-    numbersGrid = removeUnusedNumbers(numbersGrid);
-    updateCounterTable(numbersGrid);
-    numbersGrid = removeUnusedNumbers(numbersGrid);
-    updateCounterTable(numbersGrid);
-    numbersGrid = removeUnusedNumbers(numbersGrid);
-    updateCounterTable(numbersGrid);
-    numbersGrid = removeUnusedNumbers(numbersGrid);
-    updateCounterTable(numbersGrid);
-    numbersGrid = removeUnusedNumbers(numbersGrid);
-    updateCounterTable(numbersGrid);
-    numbersGrid = removeUnusedNumbers(numbersGrid);
-    updateCounterTable(numbersGrid);
-    numbersGrid = removeUnusedNumbers(numbersGrid);
-    updateCounterTable(numbersGrid);
-    numbersGrid = removeUnusedNumbers(numbersGrid);
-    updateCounterTable(numbersGrid);
-    numbersGrid = removeUnusedNumbers(numbersGrid);
-    updateCounterTable(numbersGrid);
-    numbersGrid = removeUnusedNumbers(numbersGrid);
-    updateCounterTable(numbersGrid);
-    numbersGrid = removeUnusedNumbers(numbersGrid);
-    updateCounterTable(numbersGrid);
-    numbersGrid = removeUnusedNumbers(numbersGrid);
-    updateCounterTable(numbersGrid);
-    numbersGrid = removeUnusedNumbers(numbersGrid);
-    updateCounterTable(numbersGrid);
-    // numbersGrid = removeUnusedNumbers(numbersGrid);
-    // updateCounterTable(numbersGrid);
-    // numbersGrid = removeUnusedNumbers(numbersGrid);
-    // updateCounterTable(numbersGrid);
-    // numbersGrid = removeUnusedNumbers(numbersGrid);
-    // updateCounterTable(numbersGrid);
-    // numbersGrid = removeUnusedNumbers(numbersGrid);
-    // updateCounterTable(numbersGrid);
-    // numbersGrid = removeUnusedNumbers(numbersGrid);
-    // updateCounterTable(numbersGrid);
-    // numbersGrid = removeUnusedNumbers(numbersGrid);
-    // updateCounterTable(numbersGrid);
-    // numbersGrid = removeUnusedNumbers(numbersGrid);
-    // updateCounterTable(numbersGrid);
-    // numbersGrid = removeUnusedNumbers(numbersGrid);
-    // updateCounterTable(numbersGrid);
-    // numbersGrid = removeUnusedNumbers(numbersGrid);
-    // updateCounterTable(numbersGrid);
-    console.log(counterCircleGrid, numbersGrid);
-    //   numbersGrid = removeUnusedNumbers(numbersGrid);
-    //   updateCounterTable(numbersGrid);
-    // while (!checkIfGameEnded(numbersGrid)) {
-    //   numbersGrid = removeUnusedNumbers(numbersGrid);
-    //   updateCounterTable(numbersGrid);
-    // }
-    // console.log(
-    //   "the game has ended , the ending table is: ",
-    //   counterCircleGrid,
-    //   numbersGrid
-    // );
-    //   console.log(counterCircleGrid);
-    //   numbersGrid = removeUnusedNumbers(numbersGrid);
-    //   updateCounterTable(numbersGrid);
-    //   numbersGrid = removeUnusedNumbers(numbersGrid);
-    //   updateCounterTable(numbersGrid);
-    //   numbersGrid = removeUnusedNumbers(numbersGrid);
-    //   updateCounterTable(numbersGrid);
-    //   numbersGrid = removeBiggerThanAnswerNumbers(numbersGrid);
-    //   numbersGrid = removeUnusedNumbers(numbersGrid);
-    //   updateCounterTable(numbersGrid);
-    //   numbersGrid = removeBiggerThanAnswerNumbers(numbersGrid);
-    //   numbersGrid = removeUnusedNumbers(numbersGrid);
-    //   updateCounterTable(numbersGrid);
-    //   console.log(counterCircleGrid);
-    //   numbersGrid = removeBiggerThanAnswerNumbers(numbersGrid);
-    //   numbersGrid = removeUnusedNumbers(numbersGrid);
-    //   updateCounterTable(numbersGrid);
-    //   console.log(counterCircleGrid);
-    //   numbersGrid = removeUnusedNumbers(numbersGrid);
-    //   updateCounterTable(numbersGrid);
+    while (!checkIfGameEnded(numbersGrid)) {
+        numbersGrid = removeUnusedNumbers(numbersGrid);
+        updateCounterTable(numbersGrid);
+        console.log(numbersGrid);
+    }
+    console.log("the game has ended, this is the last matrix: ", numbersGrid);
 };
 runGame();
 //# sourceMappingURL=number-sums-game-refactor.js.map
