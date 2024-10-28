@@ -1,27 +1,16 @@
 import combinations from "combinations";
 
-let numbersGrid = [
-  [0, 17, 8, 14, 18, 11, 10],
-  [2, 1, 5, 3, 4, 1, 4],
-  [13, 1, 9, 8, 9, 1, 3],
-  [14, 7, 7, 5, 9, 1, 4],
-
-  [13, 8, 6, 2, 7, 5, 7],
-
-  [19, 6, 3, 9, 3, 4, 3],
-
-  [17, 7, 5, 5, 5, 3, 6],
-];
-
 // let numbersGrid = [
-//   [0, 17, 15, 7, 3, 8, 35, 10],
-//   [16, 3, 3, 1, 2, 6, 8, 9],
-//   [20, 9, 6, 7, 8, 8, 5, 9],
-//   [8, 5, 9, 6, 6, 8, 6, 2],
-//   [16, 5, 5, 7, 8, 2, 9, 4],
-//   [12, 8, 8, 6, 1, 1, 8, 2],
-//   [12, 9, 4, 1, 6, 2, 8, 1],
-//   [11, 4, 4, 4, 7, 5, 5, 2],
+//   [0, 17, 8, 14, 18, 11, 10],
+//   [2, 1, 5, 3, 4, 1, 4],
+//   [13, 1, 9, 8, 9, 1, 3],
+//   [14, 7, 7, 5, 9, 1, 4],
+
+//   [13, 8, 6, 2, 7, 5, 7],
+
+//   [19, 6, 3, 9, 3, 4, 3],
+
+//   [17, 7, 5, 5, 5, 3, 6],
 // ];
 
 // let numbersGrid = [
@@ -33,8 +22,20 @@ let numbersGrid = [
 //   [14, 3, 1, 5, 7, 1, 3, 6, 4],
 //   [8, 4, 4, 3, 3, 1, 9, 3, 1],
 //   [11, 8, 5, 1, 8, 9, 3, 7, 8],
-//   [21, 9, 9, 9, 9, 9, 9, 9, 9],
+//   [21, 9, 7, 9, 8, 5, 7, 9, 9],
 // ];
+
+let numbersGrid = [
+  [0, 32, 4, 8, 27, 15, 16, 4, 1],
+  [14, 8, 4, 7, 1, 2, 2, 8, 1],
+  [14, 1, 6, 8, 6, 7, 1, 7, 9],
+  [16, 2, 1, 9, 7, 5, 7, 3, 2],
+  [13, 4, 6, 7, 1, 2, 8, 8, 3],
+  [10, 7, 5, 8, 2, 1, 5, 8, 1],
+  [18, 9, 6, 4, 5, 4, 8, 4, 9],
+  [16, 1, 7, 6, 6, 3, 9, 2, 6],
+  [6, 1, 4, 1, 1, 4, 6, 8, 4],
+];
 
 const counterCircleGrid = Array.from({ length: numbersGrid.length }, () =>
   Array.from({ length: numbersGrid[0].length }, () => 0)
@@ -68,6 +69,8 @@ const checkIfAnswerRight = (answer: number, answerArray: number[]) => {
       sumArr += answerArray[i];
     }
   }
+  console.log(sumArr, answer);
+
   if (sumArr == answer) {
     return true;
   }
@@ -99,17 +102,31 @@ const fillRightArray = (
   arrayIndex: number,
   isRow: boolean
 ) => {
+  console.log("fill this array: ", finishedArray, arrayIndex, isRow);
   for (let i = 1; i < finishedArray.length; i++) {
     if (isRow) {
-      if (!Number.isNaN(finishedArray[i])) {
-        counterCircleGrid[arrayIndex][i] = 1;
-        numbersGrid[arrayIndex][0] = NaN; ///// might change
+      console.log(finishedArray[i], counterCircleGrid[arrayIndex][i]);
+      if (
+        !Number.isNaN(finishedArray[i]) &&
+        counterCircleGrid[arrayIndex][i] != 1
+      ) {
+        console.log("entered if for: ", i, isRow);
+        counterCircleGrid[arrayIndex][i] = 2; // might need 2
+        ///// might change
+        console.log(numbersGrid[arrayIndex][0]);
       }
+      numbersGrid[arrayIndex][0] = NaN;
     } else {
-      if (!Number.isNaN(finishedArray[i])) {
-        counterCircleGrid[i][arrayIndex] = 1;
+      if (
+        !Number.isNaN(finishedArray[i]) &&
+        counterCircleGrid[i][arrayIndex] != 1
+      ) {
+        console.log("entered if for: ", i, isRow);
+
+        counterCircleGrid[i][arrayIndex] = 2; // might need 2
         numbersGrid[0][arrayIndex] = NaN;
       }
+      numbersGrid[0][arrayIndex] = NaN;
     }
   }
 };
@@ -123,6 +140,14 @@ const removeBiggerThanAnswerNumbers = (numbersGrid: number[][]) => {
         (counterCircleGrid[0][j] < numbersGrid[i][j] &&
           counterCircleGrid[0][j] != 0) // was numbersGrid instaed of counterCircleGrid
       ) {
+        console.log(
+          "set number ",
+          numbersGrid[i][j],
+          "to NaN at position",
+          i,
+          j,
+          "because bigger than answer"
+        );
         numbersGrid[i][j] = NaN;
         counterCircleGrid[i][j] = -1;
       }
@@ -134,14 +159,23 @@ const removeBiggerThanAnswerNumbers = (numbersGrid: number[][]) => {
 const updateCounterTable = (numbersGrid: number[][]) => {
   for (let i = 1; i < numbersGrid.length; i++) {
     const col = getCol(numbersGrid, i);
+    console.log(
+      "row: ",
+      i,
+      checkIfAnswerRight(numbersGrid[i][0], numbersGrid[i])
+    );
     if (checkIfAnswerRight(numbersGrid[i][0], numbersGrid[i])) {
       fillRightArray(numbersGrid[i], i, true);
     } else if (checkIfAnswerRight(numbersGrid[0][i], col)) {
-      // might delete
       fillRightArray(col, i, false);
     } else {
-      for (let j = 0; j < numbersGrid[0].length; j++) {
-        if (counterCircleGrid[i][j] == 1) {
+      console.log(
+        "make overall smaller ",
+        i,
+        checkIfAnswerRight(numbersGrid[i][0], numbersGrid[i])
+      );
+      for (let j = 1; j < numbersGrid[0].length; j++) {
+        if (counterCircleGrid[i][j] == 2) {
           if (counterCircleGrid[i][0] - numbersGrid[i][j] >= 0) {
             counterCircleGrid[i][0] =
               counterCircleGrid[i][0] - numbersGrid[i][j];
@@ -150,7 +184,8 @@ const updateCounterTable = (numbersGrid: number[][]) => {
             counterCircleGrid[0][j] =
               counterCircleGrid[0][j] - numbersGrid[i][j];
           }
-          //console.log(counterCircleGrid[0][j], counterCircleGrid);
+          console.log("position ", i, j, "became 1: ", counterCircleGrid[i][j]);
+          counterCircleGrid[i][j] = 1;
         }
       }
     }
@@ -184,7 +219,6 @@ const removeUnusedNumbersRow = (numbersGrid: number[][]) => {
         numbersGrid[i],
         counterCircleGrid[i][0]
       );
-      //   console.log(allGoodCombinations);
       const indexArray = createIndexArray(numbersGrid[i].slice(1));
 
       let appearancesArray = Array.apply(
@@ -199,22 +233,80 @@ const removeUnusedNumbersRow = (numbersGrid: number[][]) => {
           }
         }
       }
+      console.log("line row number: ", i);
+      console.log("current numbers array: ", numbersGrid[i]);
+      console.log("current index table  array: ", counterCircleGrid[i]);
+      console.log("all good combinations: ", allGoodCombinations);
+
+      console.log("appearances: ", appearancesArray);
 
       if (!Number.isNaN(numbersGrid[i][0])) {
+        const hasToAppearArray = [];
         const allZeroPositions = [];
-        appearancesArray.filter((number, i) => {
+        appearancesArray.forEach((number, n) => {
           if (number == 0) {
-            allZeroPositions.push(i);
+            allZeroPositions.push(n);
+          }
+          console.log(
+            "for line: ",
+            i,
+            "the length of combinations i: ",
+            allGoodCombinations.length,
+            number
+          );
+          console.log(
+            "for line: ",
+            i,
+            "the length of combinations i: ",
+            allGoodCombinations.length,
+            number,
+            "for row"
+          );
+          if (
+            number == allGoodCombinations.length &&
+            allGoodCombinations.length != 0
+          ) {
+            hasToAppearArray.push(n);
+            console.log(
+              "all good combinations length: ",
+              allGoodCombinations.length
+            );
           }
           //  if(number == allGoodCombinations[]) /// if number has as many appearances as combinations = 1
         });
         allZeroPositions.map((position) => {
           if (
             position < indexArray.length &&
-            counterCircleGrid[i][position + 1] != 1
+            counterCircleGrid[i][position + 1] != 1 &&
+            counterCircleGrid[i][position + 1] != 2
           ) {
+            console.log("position entered if: ", position);
+
+            console.log(
+              "set number ",
+              numbersGrid[i][position + 1],
+              "to NaN from line: ",
+              i,
+              position + 1
+            );
             numbersGrid[i][position + 1] = NaN;
             counterCircleGrid[i][position + 1] = -1;
+            console.log(counterCircleGrid[i]);
+          }
+        });
+        hasToAppearArray.map((position) => {
+          if (
+            position < indexArray.length &&
+            counterCircleGrid[i][position + 1] != -1 &&
+            counterCircleGrid[i][position + 1] != 1 &&
+            counterCircleGrid[i][position + 1] != 2
+          ) {
+            console.log(
+              "this number has to appear at position: ",
+              i,
+              position + 1
+            );
+            counterCircleGrid[i][position + 1] = 2;
           }
         });
       }
@@ -246,35 +338,71 @@ const removeUnusedNumbersCol = (numbersGrid: number[][]) => {
           }
         }
       }
+      console.log("line col number: ", i);
+      console.log("current numbers array: ", col);
+      console.log("all good combinations: ", allGoodCombinations);
 
+      console.log("appearances: ", appearancesArray);
       if (!Number.isNaN(numbersGrid[0][i])) {
-        console.log(allGoodCombinations, allGoodCombinations.length);
-
         const allZeroPositions = [];
-        // const hasToAppearArray = [];
-        appearancesArray.filter((number, i) => {
+        const hasToAppearArray = [];
+        appearancesArray.forEach((number, n) => {
           if (number == 0) {
-            allZeroPositions.push(i);
+            allZeroPositions.push(n);
           }
-          //   if (
-          //     number == allGoodCombinations.length &&
-          //     allGoodCombinations.length != 0
-          //   ) {
-          //     hasToAppearArray.push(i);
-          //   }
+          console.log(
+            "for line: ",
+            i,
+            "the length of combinations i: ",
+            allGoodCombinations.length,
+            number,
+            "for col"
+          );
+          if (
+            number == allGoodCombinations.length &&
+            allGoodCombinations.length != 0
+          ) {
+            hasToAppearArray.push(n);
+            console.log(
+              "all good combinations length: ",
+              allGoodCombinations.length
+            );
+          }
         });
         allZeroPositions.map((position) => {
           if (
             position < indexArray.length &&
-            counterCircleGrid[position + 1][i] != 1
+            counterCircleGrid[position + 1][i] != 1 &&
+            counterCircleGrid[position + 1][i] != 2
           ) {
             numbersGrid[position + 1][i] = NaN;
             counterCircleGrid[position + 1][i] = -1;
+            console.log(
+              "this number is set to -1 for having no combinations: ",
+              position + 1,
+              i,
+              numbersGrid[position + 1][i],
+              appearancesArray[position + 1]
+            );
           }
         });
-        // hasToAppearArray.map((position)=> {
+        hasToAppearArray.map((position) => {
+          if (
+            position < indexArray.length &&
+            counterCircleGrid[position + 1][i] != -1 &&
+            counterCircleGrid[position + 1][i] != 1 &&
+            counterCircleGrid[position + 1][i] != 2
+          ) {
+            console.log(
+              "this number has to appear at position: ",
+              position + 1,
+              i,
+              appearancesArray[position + 1]
+            );
 
-        // })
+            counterCircleGrid[position + 1][i] = 2;
+          }
+        });
       }
     }
   }
@@ -316,45 +444,65 @@ const runGame = () => {
   numbersGrid = removeBiggerThanAnswerNumbers(numbersGrid);
   numbersGrid = removeUnusedNumbers(numbersGrid);
   updateCounterTable(numbersGrid);
-  console.log(numbersGrid);
+  // while (!checkIfGameEnded(numbersGrid)) {
+  //   numbersGrid = removeUnusedNumbers(numbersGrid);
+  //   updateCounterTable(numbersGrid);
+  //   console.log(numbersGrid);
+  // }
 
-  while (!checkIfGameEnded(numbersGrid)) {
-    // console.log("entered while ");
-    numbersGrid = removeUnusedNumbers(numbersGrid);
-    updateCounterTable(numbersGrid);
-  }
+  numbersGrid = removeUnusedNumbers(numbersGrid);
+  updateCounterTable(numbersGrid);
+  numbersGrid = removeUnusedNumbers(numbersGrid);
+  updateCounterTable(numbersGrid);
+  numbersGrid = removeUnusedNumbers(numbersGrid);
+  updateCounterTable(numbersGrid);
+  numbersGrid = removeUnusedNumbers(numbersGrid);
+  updateCounterTable(numbersGrid);
+  numbersGrid = removeUnusedNumbers(numbersGrid);
+  updateCounterTable(numbersGrid);
+  numbersGrid = removeUnusedNumbers(numbersGrid);
+  updateCounterTable(numbersGrid);
+  numbersGrid = removeUnusedNumbers(numbersGrid);
+  updateCounterTable(numbersGrid);
+  numbersGrid = removeUnusedNumbers(numbersGrid);
+  updateCounterTable(numbersGrid);
+  numbersGrid = removeUnusedNumbers(numbersGrid);
+  updateCounterTable(numbersGrid);
+  numbersGrid = removeUnusedNumbers(numbersGrid);
+  updateCounterTable(numbersGrid);
+  numbersGrid = removeUnusedNumbers(numbersGrid);
+  updateCounterTable(numbersGrid);
+  numbersGrid = removeUnusedNumbers(numbersGrid);
+  updateCounterTable(numbersGrid);
+  numbersGrid = removeUnusedNumbers(numbersGrid);
+  updateCounterTable(numbersGrid);
+  // numbersGrid = removeUnusedNumbers(numbersGrid);
+  // updateCounterTable(numbersGrid);
+  // numbersGrid = removeUnusedNumbers(numbersGrid);
+  // updateCounterTable(numbersGrid);
+  // numbersGrid = removeUnusedNumbers(numbersGrid);
+  // updateCounterTable(numbersGrid);
+  // numbersGrid = removeUnusedNumbers(numbersGrid);
+  // updateCounterTable(numbersGrid);
+  // numbersGrid = removeUnusedNumbers(numbersGrid);
+  // updateCounterTable(numbersGrid);
+  // numbersGrid = removeUnusedNumbers(numbersGrid);
+  // updateCounterTable(numbersGrid);
+  // numbersGrid = removeUnusedNumbers(numbersGrid);
+  // updateCounterTable(numbersGrid);
+  // numbersGrid = removeUnusedNumbers(numbersGrid);
+  // updateCounterTable(numbersGrid);
+  // numbersGrid = removeUnusedNumbers(numbersGrid);
+  // updateCounterTable(numbersGrid);
 
-  console.log("the game has ended , the ending table is: ", numbersGrid);
-  //   console.log(counterCircleGrid);
-
+  console.log(counterCircleGrid, numbersGrid);
   //   numbersGrid = removeUnusedNumbers(numbersGrid);
   //   updateCounterTable(numbersGrid);
 
+  // while (!checkIfGameEnded(numbersGrid)) {
   //   numbersGrid = removeUnusedNumbers(numbersGrid);
   //   updateCounterTable(numbersGrid);
-
-  //   numbersGrid = removeUnusedNumbers(numbersGrid);
-  //   updateCounterTable(numbersGrid);
-
-  console.log(numbersGrid);
-  //   numbersGrid = removeBiggerThanAnswerNumbers(numbersGrid);
-  //   numbersGrid = removeUnusedNumbers(numbersGrid);
-  //   updateCounterTable(numbersGrid);
-
-  //   numbersGrid = removeBiggerThanAnswerNumbers(numbersGrid);
-  //   numbersGrid = removeUnusedNumbers(numbersGrid);
-  //   updateCounterTable(numbersGrid);
-
-  //   console.log(counterCircleGrid);
-
-  //   numbersGrid = removeBiggerThanAnswerNumbers(numbersGrid);
-  //   numbersGrid = removeUnusedNumbers(numbersGrid);
-  //   updateCounterTable(numbersGrid);
-
-  //   console.log(counterCircleGrid);
-
-  //   numbersGrid = removeUnusedNumbers(numbersGrid);
-  //   updateCounterTable(numbersGrid);
+  // }
 };
 
 runGame();
