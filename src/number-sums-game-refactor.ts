@@ -101,18 +101,13 @@ const fillRightArray = (
   arrayIndex: number,
   isRow: boolean
 ) => {
-  console.log("fill this array: ", finishedArray, arrayIndex, isRow);
   for (let i = 1; i < finishedArray.length; i++) {
     if (isRow) {
-      console.log(finishedArray[i], counterCircleGrid[arrayIndex][i]);
       if (
         !Number.isNaN(finishedArray[i]) &&
         counterCircleGrid[arrayIndex][i] != 1
       ) {
-        console.log("entered if for: ", i, isRow);
-        counterCircleGrid[arrayIndex][i] = 2; // might need 2
-        ///// might change
-        console.log(numbersGrid[arrayIndex][0]);
+        counterCircleGrid[arrayIndex][i] = 2;
       }
       numbersGrid[arrayIndex][0] = NaN;
     } else {
@@ -120,8 +115,6 @@ const fillRightArray = (
         !Number.isNaN(finishedArray[i]) &&
         counterCircleGrid[i][arrayIndex] != 1
       ) {
-        console.log("entered if for: ", i, isRow);
-
         counterCircleGrid[i][arrayIndex] = 2; // might need 2
         numbersGrid[0][arrayIndex] = NaN;
       }
@@ -137,16 +130,8 @@ const removeBiggerThanAnswerNumbers = (numbersGrid: number[][]) => {
         (counterCircleGrid[i][0] < numbersGrid[i][j] &&
           counterCircleGrid[i][0] != 0) ||
         (counterCircleGrid[0][j] < numbersGrid[i][j] &&
-          counterCircleGrid[0][j] != 0) // was numbersGrid instaed of counterCircleGrid
+          counterCircleGrid[0][j] != 0)
       ) {
-        console.log(
-          "set number ",
-          numbersGrid[i][j],
-          "to NaN at position",
-          i,
-          j,
-          "because bigger than answer"
-        );
         numbersGrid[i][j] = NaN;
         counterCircleGrid[i][j] = -1;
       }
@@ -158,21 +143,12 @@ const removeBiggerThanAnswerNumbers = (numbersGrid: number[][]) => {
 const updateCounterTable = (numbersGrid: number[][]) => {
   for (let i = 1; i < numbersGrid.length; i++) {
     const col = getCol(numbersGrid, i);
-    console.log(
-      "row: ",
-      i,
-      checkIfAnswerRight(numbersGrid[i][0], numbersGrid[i])
-    );
+
     if (checkIfAnswerRight(numbersGrid[i][0], numbersGrid[i])) {
       fillRightArray(numbersGrid[i], i, true);
     } else if (checkIfAnswerRight(numbersGrid[0][i], col)) {
       fillRightArray(col, i, false);
     } else {
-      console.log(
-        "make overall smaller ",
-        i,
-        checkIfAnswerRight(numbersGrid[i][0], numbersGrid[i])
-      );
       for (let j = 1; j < numbersGrid[0].length; j++) {
         if (counterCircleGrid[i][j] == 2) {
           if (counterCircleGrid[i][0] - numbersGrid[i][j] >= 0) {
@@ -183,7 +159,6 @@ const updateCounterTable = (numbersGrid: number[][]) => {
             counterCircleGrid[0][j] =
               counterCircleGrid[0][j] - numbersGrid[i][j];
           }
-          console.log("position ", i, j, "became 1: ", counterCircleGrid[i][j]);
           counterCircleGrid[i][j] = 1;
         }
       }
@@ -232,12 +207,6 @@ const removeUnusedNumbersRow = (numbersGrid: number[][]) => {
           }
         }
       }
-      console.log("line row number: ", i);
-      console.log("current numbers array: ", numbersGrid[i]);
-      console.log("current index table  array: ", counterCircleGrid[i]);
-      console.log("all good combinations: ", allGoodCombinations);
-
-      console.log("appearances: ", appearancesArray);
 
       if (!Number.isNaN(numbersGrid[i][0])) {
         const hasToAppearArray = [];
@@ -246,32 +215,13 @@ const removeUnusedNumbersRow = (numbersGrid: number[][]) => {
           if (number == 0) {
             allZeroPositions.push(n);
           }
-          console.log(
-            "for line: ",
-            i,
-            "the length of combinations i: ",
-            allGoodCombinations.length,
-            number
-          );
-          console.log(
-            "for line: ",
-            i,
-            "the length of combinations i: ",
-            allGoodCombinations.length,
-            number,
-            "for row"
-          );
+
           if (
             number == allGoodCombinations.length &&
             allGoodCombinations.length != 0
           ) {
             hasToAppearArray.push(n);
-            console.log(
-              "all good combinations length: ",
-              allGoodCombinations.length
-            );
           }
-          //  if(number == allGoodCombinations[]) /// if number has as many appearances as combinations = 1
         });
         allZeroPositions.map((position) => {
           if (
@@ -279,18 +229,8 @@ const removeUnusedNumbersRow = (numbersGrid: number[][]) => {
             counterCircleGrid[i][position + 1] != 1 &&
             counterCircleGrid[i][position + 1] != 2
           ) {
-            console.log("position entered if: ", position);
-
-            console.log(
-              "set number ",
-              numbersGrid[i][position + 1],
-              "to NaN from line: ",
-              i,
-              position + 1
-            );
             numbersGrid[i][position + 1] = NaN;
             counterCircleGrid[i][position + 1] = -1;
-            console.log(counterCircleGrid[i]);
           }
         });
         hasToAppearArray.map((position) => {
@@ -300,11 +240,6 @@ const removeUnusedNumbersRow = (numbersGrid: number[][]) => {
             counterCircleGrid[i][position + 1] != 1 &&
             counterCircleGrid[i][position + 1] != 2
           ) {
-            console.log(
-              "this number has to appear at position: ",
-              i,
-              position + 1
-            );
             counterCircleGrid[i][position + 1] = 2;
           }
         });
@@ -322,7 +257,7 @@ const removeUnusedNumbersCol = (numbersGrid: number[][]) => {
         col,
         counterCircleGrid[0][i]
       );
-      //   console.log(allGoodCombinations);
+
       const indexArray = createIndexArray(col.slice(1));
 
       let appearancesArray = Array.apply(null, Array(col.length)).map(
@@ -337,11 +272,7 @@ const removeUnusedNumbersCol = (numbersGrid: number[][]) => {
           }
         }
       }
-      console.log("line col number: ", i);
-      console.log("current numbers array: ", col);
-      console.log("all good combinations: ", allGoodCombinations);
 
-      console.log("appearances: ", appearancesArray);
       if (!Number.isNaN(numbersGrid[0][i])) {
         const allZeroPositions = [];
         const hasToAppearArray = [];
@@ -349,23 +280,12 @@ const removeUnusedNumbersCol = (numbersGrid: number[][]) => {
           if (number == 0) {
             allZeroPositions.push(n);
           }
-          console.log(
-            "for line: ",
-            i,
-            "the length of combinations i: ",
-            allGoodCombinations.length,
-            number,
-            "for col"
-          );
+
           if (
             number == allGoodCombinations.length &&
             allGoodCombinations.length != 0
           ) {
             hasToAppearArray.push(n);
-            console.log(
-              "all good combinations length: ",
-              allGoodCombinations.length
-            );
           }
         });
         allZeroPositions.map((position) => {
@@ -376,13 +296,6 @@ const removeUnusedNumbersCol = (numbersGrid: number[][]) => {
           ) {
             numbersGrid[position + 1][i] = NaN;
             counterCircleGrid[position + 1][i] = -1;
-            console.log(
-              "this number is set to -1 for having no combinations: ",
-              position + 1,
-              i,
-              numbersGrid[position + 1][i],
-              appearancesArray[position + 1]
-            );
           }
         });
         hasToAppearArray.map((position) => {
@@ -392,13 +305,6 @@ const removeUnusedNumbersCol = (numbersGrid: number[][]) => {
             counterCircleGrid[position + 1][i] != 1 &&
             counterCircleGrid[position + 1][i] != 2
           ) {
-            console.log(
-              "this number has to appear at position: ",
-              position + 1,
-              i,
-              appearancesArray[position + 1]
-            );
-
             counterCircleGrid[position + 1][i] = 2;
           }
         });
@@ -447,8 +353,6 @@ const runGame = () => {
     numbersGrid = removeUnusedNumbers(numbersGrid);
     updateCounterTable(numbersGrid);
   }
-
-  console.log("the game has ended, this is the last matrix: ", numbersGrid);
 };
 
 runGame();
