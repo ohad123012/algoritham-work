@@ -1,0 +1,144 @@
+{
+  "name": "kohav",
+  "weight": 1000,
+  "maxStations": 4,
+  "children": [
+    {
+      "name": "left node",
+      "weight": 10,
+      "maxStations": 1,
+      "children": {
+        "name": "intermediate mount",
+        "weight": 1,
+        "maxStations": 1,
+        "children": {
+          "name": "Hexagon Canister",
+          "weight": 30,
+          "maxStations": 6,
+          "children": [
+            {
+              "name": "Bomb A",
+              "weight": 100,
+              "maxStations": 0,
+              "children": {}
+            },
+            {
+              "name": "Bomb A",
+              "weight": 100,
+              "maxStations": 0,
+              "children": {}
+            },
+            {
+              "name": "Bomb A+",
+              "weight": 500,
+              "maxStations": 0,
+              "children": {}
+            },
+            {
+              "name": "Bomb A",
+              "weight": 100,
+              "maxStations": 0,
+              "children": {}
+            },
+            {
+              "name": "Bomb A",
+              "weight": 100,
+              "maxStations": 0,
+              "children": {}
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "center left node",
+      "weight": 10,
+      "maxStations": 1,
+      "children": {
+        "name": "Hexagon Canister",
+        "weight": 30,
+        "maxStations": 6,
+        "children": [
+          {
+            "name": "Bomb A+",
+            "weight": 500,
+            "maxStations": 0,
+            "children": {}
+          },
+          {
+            "name": "Bomb A+",
+            "weight": 500,
+            "maxStations": 0,
+            "children": {}
+          },
+          {
+            "name": "Bomb A+",
+            "weight": 500,
+            "maxStations": 0,
+            "children": {}
+          },
+          {
+            "name": "Bomb A+",
+            "weight": 500,
+            "maxStations": 0,
+            "children": {}
+          },
+          {
+            "name": "Bomb A",
+            "weight": 100,
+            "maxStations": 0,
+            "children": {}
+          }
+        ]
+      }
+    },
+    {
+      "name": "center right node",
+      "weight": 10,
+      "maxStations": 1,
+      "children": {
+        "name": "Squared Canister",
+        "weight": 30,
+        "maxStations": 4,
+        "children": [
+          {
+            "name": "Bomb A",
+            "weight": 100,
+            "maxStations": 0,
+            "children": {}
+          }
+        ]
+      }
+    },
+    {
+      "name": "right node",
+      "weight": 10,
+      "maxStations": 1,
+      "children": {
+        "name": "Squared Canister",
+        "weight": 30,
+        "maxStations": 4,
+        "children": [
+          {
+            "name": "Bomb A+",
+            "weight": 500,
+            "maxStations": 0,
+            "children": {}
+          },
+          {
+            "name": "Bomb A+",
+            "weight": 500,
+            "maxStations": 0,
+            "children": {}
+          },
+          {
+            "name": "Bomb A",
+            "weight": 100,
+            "maxStations": 0,
+            "children": {}
+          }
+        ]
+      }
+    }
+  ]
+}
