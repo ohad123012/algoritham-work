@@ -353,6 +353,7 @@ const runGame = () => {
     numbersGrid = removeUnusedNumbers(numbersGrid);
     updateCounterTable(numbersGrid);
   }
+  console.log(numbersGrid);
 };
 
 runGame();

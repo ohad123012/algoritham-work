@@ -1,0 +1,95 @@
+{
+  "name": "shoval",
+  "weight": 700,
+  "maxStations": 2,
+  "children": [
+    {
+      "name": "left node",
+      "weight": 10,
+      "maxStations": 1,
+      "children": {
+        "name": "intermediate mount",
+        "weight": 1,
+        "maxStations": 1,
+        "children": {
+          "name": "Squared Canister",
+          "weight": 30,
+          "maxStations": 4,
+          "children": [
+            {
+              "name": "Bomb A",
+              "weight": 100,
+              "maxStations": 0,
+              "children": {}
+            },
+            {
+              "name": "Bomb A",
+              "weight": 100,
+              "maxStations": 0,
+              "children": {}
+            },
+            {
+              "name": "Bomb A+",
+              "weight": 500,
+              "maxStations": 0,
+              "children": {}
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "right node",
+      "weight": 10,
+      "maxStations": 1,
+      "children": {
+        "name": "intermediate mount",
+        "weight": 1,
+        "maxStations": 1,
+        "children": {
+          "name": "Hexagon Canister",
+          "weight": 30,
+          "maxStations": 6,
+          "children": [
+            {
+              "name": "Bomb A+",
+              "weight": 500,
+              "maxStations": 0,
+              "children": {}
+            },
+            {
+              "name": "Bomb A+",
+              "weight": 500,
+              "maxStations": 0,
+              "children": {}
+            },
+            {
+              "name": "Bomb A+",
+              "weight": 500,
+              "maxStations": 0,
+              "children": {}
+            },
+            {
+              "name": "Bomb A+",
+              "weight": 500,
+              "maxStations": 0,
+              "children": {}
+            },
+            {
+              "name": "Bomb A",
+              "weight": 100,
+              "maxStations": 0,
+              "children": {}
+            },
+            {
+              "name": "Bomb A",
+              "weight": 100,
+              "maxStations": 0,
+              "children": {}
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
